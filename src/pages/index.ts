@@ -1,0 +1,16 @@
+export { default as LoginPage } from './auth/login/LoginPage';
+export { default as BasePage } from './base/BasePage';
+export { default as AddCategoryPage } from './category/AddCategoryPage';
+export { default as CategoryPage } from './category/CategoryPage';
+export { default as CategoryDetailPage } from './category/category-detail/CategoryDetailPage';
+export { default as EditCategoryPage } from './category/category-detail/EditCategoryPage';
+export { default as DashboardPage } from './dashboard/DashboardPage';
+export { default as HomePage } from './home/HomePage';
+export { default as AddProductPage } from './product/AddProductPage';
+export { default as ProductPage } from './product/ProductPage';
+export { default as EditProductPage } from './product/product-detail/EditProductPage';
+export { default as ProductDetailPage } from './product/product-detail/ProductDetailPage';
+export { default as AddVoucherPage } from './voucher/AddVoucherPage';
+export { default as VoucherPage } from './voucher/VoucherPage';
+export { default as EditVoucherPage } from './voucher/voucher-detail/EditVoucherPage';
+export { default as VoucherDetailPage } from './voucher/voucher-detail/VoucherDetailPage';

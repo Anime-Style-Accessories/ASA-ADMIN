@@ -1,0 +1,73 @@
+export const ROUTES = {
+  AUTH: {
+    LOGIN: '/login',
+  },
+  HOME: '/',
+  DASHBOARD: '/dashboard',
+  PRODUCTS: {
+    INDEX: '/product',
+    NEW: '/product/new',
+    ID: '/product/:id',
+    EDIT: '/product/:id/edit',
+    DRAFT: '/product/draft',
+    LOW_STOCK: '/product/low-stock',
+  },
+  CATEGORIES: {
+    INDEX: '/category',
+    NEW: '/category/new',
+    ID: '/category/:id',
+    EDIT: '/category/:id/edit',
+  },
+  ORDERS: {
+    INDEX: '/order',
+    ID: '/order/:id',
+  },
+  TRANSACTIONS: '/transaction',
+  CONTACT: {
+    INDEX: '/contact',
+    ID: '/contact/:id',
+  },
+  REFUNDS: {
+    INDEX: '/refund',
+    REQUESTED: '/refund/requested',
+    REQUESTED_ID: '/refund/requested/:id',
+    POLICY: '/refund/policy',
+    NEW_POLICY: '/refund/policy/new',
+    POLICY_ID: '/refund/policy/:id',
+    EDIT_POLICY: '/refund/policy/:id/edit',
+    REASONS: '/refund/reason',
+    NEW_REASON: '/refund/reason/new',
+    REASON_ID: '/refund/reason/:id',
+    EDIT_REASON: '/refund/reason/:id/edit',
+  },
+  COUPONS: {
+    INDEX: '/coupon',
+    NEW: '/coupon/new',
+    ID: '/coupon/:id',
+    EDIT: '/coupon/:id/edit',
+  },
+  NOTIFICATIONS: {
+    INDEX: '/notification',
+    NEW: '/notification/new',
+    ID: '/notification/:id',
+  },
+  FAQS: {
+    INDEX: '/faq',
+    NEW: '/faq/new',
+    ID: '/faq/:id',
+    EDIT: '/faq/:id/edit',
+  },
+  TERMS_AND_CONDITIONS: {
+    INDEX: '/terms-and-conditions',
+    NEW: '/terms-and-conditions/new',
+    ID: '/terms-and-conditions/:id',
+    EDIT: '/terms-and-conditions/:id/edit',
+  },
+  SETTINGS: {
+    INDEX: '/setting',
+    GENERAL: '/setting/general',
+    APPEARANCE: '/setting/appearance',
+    MAINTAINANCE: '/setting/maintainance',
+  },
+  PROFILE: '/profile',
+};
