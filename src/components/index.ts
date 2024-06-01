@@ -1,6 +1,7 @@
 export { default as CategorySelect } from './CategorySelect';
 export { default as CustomTable } from './CustomTable';
 export type { ColumnType } from './CustomTable';
+export { default as OrderItemCard } from './OrderItemCard';
 export { default as PageHeader } from './PageHeader';
 export { default as PasswordInput } from './PasswordInput';
 export { default as ScreenLoader } from './ScreenLoader';

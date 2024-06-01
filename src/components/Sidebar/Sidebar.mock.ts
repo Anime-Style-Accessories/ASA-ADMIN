@@ -1,6 +1,5 @@
 import { ROUTES as APP_ROUTES } from '@/constants';
 import {
-  HandCoins,
   Layers3,
   LayoutDashboard,
   Package,
@@ -64,11 +63,11 @@ export const sidebarMock: TSidebarGroup[] = [
         icon: ShoppingCart,
         href: APP_ROUTES.ORDERS.INDEX,
       },
-      {
-        title: 'Refunds',
-        icon: HandCoins,
-        href: APP_ROUTES.REFUNDS.REQUESTED,
-      },
+      // {
+      //   title: 'Refunds',
+      //   icon: HandCoins,
+      //   href: APP_ROUTES.REFUNDS.REQUESTED,
+      // },
     ],
   },
   {

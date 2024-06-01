@@ -40,7 +40,10 @@ const ProductPage = () => {
 
   return (
     <div>
-      <PageHeader title="Add Product" showRefresh={false} />
+      <PageHeader
+        title="All Products"
+        queryKey={[QUERY_KEY.PRODUCTS.GET_PRODUCT]}
+      />
       <CustomTable
         dataSource={products || []}
         columns={productColumns}

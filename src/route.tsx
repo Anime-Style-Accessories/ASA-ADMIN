@@ -12,6 +12,8 @@ import {
   EditVoucherPage,
   HomePage,
   LoginPage,
+  OrderDetailPage,
+  OrderPage,
   ProductPage,
   VoucherPage,
 } from './pages';
@@ -68,6 +70,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.COUPONS.EDIT,
         element: <EditVoucherPage />,
+      },
+      {
+        path: ROUTES.ORDERS.INDEX,
+        element: <OrderPage />,
+      },
+      {
+        path: ROUTES.ORDERS.ID,
+        element: <OrderDetailPage />,
       },
       {
         path: '*',

@@ -1,80 +1,37 @@
 import { ROUTES } from '@/constants';
-import { ProductData } from '@/dto';
-import { useDeleteProductMutation } from '@/services/product';
+import { OrderData } from '@/dto';
 import { formatCurrency } from '@/utils';
-import {
-  Button,
-  Image,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@nextui-org/react';
-import { SquarePen, Trash2 } from 'lucide-react';
+import { Button } from '@nextui-org/react';
+import dayjs from 'dayjs';
+import { SquarePen } from 'lucide-react';
 import { Key, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { ProductColumnKey } from '../config';
+import { OrderColumnKey } from '../config';
 
 type Props = {
-  product: ProductData;
+  order: OrderData;
   columnKey: Key;
 };
 
-const RenderCellProduct = ({ product, columnKey }: Props) => {
-  const cellValue = product[columnKey as keyof ProductData];
+const RenderCellOrder = ({ order, columnKey }: Props) => {
+  const cellValue = order[columnKey as keyof OrderData];
   const [showPopover, setShowPopover] = useState(false);
   const navigate = useNavigate();
   const isLoading = false;
 
-  const deleteProductMutation = useDeleteProductMutation();
+  const onDelete = () => {};
 
-  const onDelete = () => {
-    deleteProductMutation.mutate(product.id, {
-      onSuccess: () => {
-        toast.success('Delete product successfully');
-      },
-      onError: (err: any) => {
-        toast.error(err?.response?.data?.message || err.message);
-      },
-    });
-  };
-
-  const category = product.categoryDto;
-
-  switch (columnKey as ProductColumnKey) {
-    case 'name':
-      return (
-        <div className="flex gap-2">
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={50}
-            height={50}
-            className="hidden overflow-hidden object-contain md:block"
-          />
-          <div>
-            <p className="line-clamp-1">{product.name}</p>
-            <p className="line-clamp-1 text-sm text-slate-500">
-              {category.name}
-            </p>
-          </div>
-        </div>
-      );
-    case 'price':
-      return formatCurrency(product.price);
-    case 'quantity':
-      return product.quantity;
-    case 'color':
-      return (
-        <div
-          className="size-6 rounded-full"
-          style={{
-            background: product.color,
-          }}
-        />
-      );
-    case 'size':
-      return product.size;
+  switch (columnKey as OrderColumnKey) {
+    case 'totalAmount':
+      return formatCurrency(order.totalAmount);
+    case 'createdAt':
+      return dayjs(order.createdAt).format('DD/MM/YYYY HH:mm');
+    case 'paymentStatus':
+      return order.paymentStatus;
+    case 'shippingStatus':
+      return order.shippingStatus;
+    case 'user':
+      return order.user;
     case 'actions':
       return (
         <div className="flex items-center gap-1">
@@ -83,12 +40,10 @@ const RenderCellProduct = ({ product, columnKey }: Props) => {
             variant="light"
             size="sm"
             color="primary"
-            onPress={() =>
-              navigate(ROUTES.PRODUCTS.EDIT.replace(':id', product.id))
-            }>
+            onPress={() => navigate(ROUTES.ORDERS.ID.replace(':id', order.id))}>
             <SquarePen size={20} />
           </Button>
-          <Popover
+          {/* <Popover
             placement="right"
             isOpen={showPopover}
             onOpenChange={setShowPopover}
@@ -107,7 +62,7 @@ const RenderCellProduct = ({ product, columnKey }: Props) => {
               <div className="space-y-2 self-end px-1 py-2">
                 <p className="font-bold">Delete confirmation</p>
                 <p>
-                  Are you sure you want to delete <b>{product.name}</b> product?
+                  Are you sure you want to delete <b>{order.id}</b> order?
                 </p>
                 <div className="flex justify-end space-x-2">
                   <Button color="danger" onClick={onDelete} size="sm">
@@ -122,7 +77,7 @@ const RenderCellProduct = ({ product, columnKey }: Props) => {
                 </div>
               </div>
             </PopoverContent>
-          </Popover>
+          </Popover> */}
         </div>
       );
     default:
@@ -130,4 +85,4 @@ const RenderCellProduct = ({ product, columnKey }: Props) => {
   }
 };
 
-export default RenderCellProduct;
+export default RenderCellOrder;

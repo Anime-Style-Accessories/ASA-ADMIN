@@ -1,5 +1,4 @@
 import { IBaseResponse } from '@/utils';
-import { UserData } from './user';
 
 export type CreateOrderItemRequest = {
   productId: string;
@@ -20,11 +19,35 @@ export type CreateOrderRequest = {
 
 export type OrderData = {
   id: string;
-  user: UserData;
+  user: string;
   createdAt: string;
   totalAmount: number;
   paymentStatus: string;
   shippingStatus: string;
+};
+
+export type OrderItemData = {
+  id: string;
+  quantity: number;
+  pricePerUnit: number;
+  size: string;
+  color: string;
+  productData: {
+    createdAt: string;
+    updatedAt: string;
+    productName: string;
+    productImage: string;
+    productPrice: number;
+    productQuantity: number;
+    productColor: string;
+    productSize: string;
+    category: {
+      name: string;
+      description: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
 };
 
 export type OrderDto = IBaseResponse<OrderData>;

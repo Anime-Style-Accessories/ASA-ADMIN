@@ -9,7 +9,6 @@ import { SidebarGroupItem, sidebarMock } from '.';
 
 const Sidebar = () => {
   const { theme } = useTheme();
-  console.log('theme', theme);
   return (
     <>
       <div

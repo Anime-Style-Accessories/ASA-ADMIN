@@ -37,5 +37,7 @@ export const API_ROUTES = {
     CREATE: '/orders/create_order',
     GET_ALL: '/orders/getOrders',
     GET: '/orders/getOrderById/:id',
+    UPDATE_STATUS: '/orders/updateOrderStatus/:id',
+    GET_ITEMS: '/order_items/:id',
   },
 };

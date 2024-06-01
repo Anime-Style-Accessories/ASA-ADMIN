@@ -2,35 +2,41 @@ import { ColumnType } from '@/components';
 
 export type OrderColumnKey =
   | 'actions'
-  | 'name'
-  | 'price'
-  | 'quantity'
-  | 'size'
-  | 'color';
+  | 'user'
+  | 'createdAt'
+  | 'paymentStatus'
+  | 'totalAmount'
+  | 'shippingStatus'
+  | 'id';
 export const orderColumns: ColumnType<OrderColumnKey>[] = [
   {
-    label: 'Order',
-    key: 'name',
+    label: 'ID',
+    key: 'id',
+  },
+  {
+    label: 'User',
+    key: 'user',
     allowSorting: true,
   },
   {
-    label: 'Price',
-    key: 'price',
+    label: 'Created At',
+    key: 'createdAt',
     allowSorting: true,
   },
   {
-    label: 'Quantity',
-    key: 'quantity',
+    label: 'Total Amount',
+    key: 'totalAmount',
     allowSorting: true,
   },
   {
-    label: 'Size',
-    key: 'size',
+    label: 'Payment Status',
+    key: 'paymentStatus',
     allowSorting: true,
   },
+
   {
-    label: 'Color',
-    key: 'color',
+    label: 'Shipping Status',
+    key: 'shippingStatus',
     allowSorting: true,
   },
   {

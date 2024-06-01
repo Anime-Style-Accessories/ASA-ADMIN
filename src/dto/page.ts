@@ -1,5 +1,5 @@
 import { CategoryData } from './category';
-import { OrderData } from './order';
+import { OrderData, OrderItemData } from './order';
 import { ProductData } from './product';
 import { VoucherData } from './voucher';
 
@@ -26,3 +26,4 @@ export type PageDataVoucher = PageData<VoucherData>;
 export type PageDataProduct = PageData<ProductData>;
 export type PageDataOrder = PageData<OrderData>;
 export type PageDataCategory = PageData<CategoryData>;
+export type PageDataOrderItem = PageData<OrderItemData>;

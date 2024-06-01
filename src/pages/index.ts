@@ -6,6 +6,8 @@ export { default as CategoryDetailPage } from './category/category-detail/Catego
 export { default as EditCategoryPage } from './category/category-detail/EditCategoryPage';
 export { default as DashboardPage } from './dashboard/DashboardPage';
 export { default as HomePage } from './home/HomePage';
+export { default as OrderPage } from './order/OrderPage';
+export { default as OrderDetailPage } from './order/order-detail/OrderDetailPage';
 export { default as AddProductPage } from './product/AddProductPage';
 export { default as ProductPage } from './product/ProductPage';
 export { default as EditProductPage } from './product/product-detail/EditProductPage';
