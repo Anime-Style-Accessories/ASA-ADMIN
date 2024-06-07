@@ -3,10 +3,10 @@ import { CreateProductRequest, UpdateProductRequest } from '@/dto';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { productService } from './product.service';
 
-export const useCreateProductMutation = () => {
+export const useCreateProductMutation = (signal?: AbortSignal) => {
   return useMutation({
     mutationFn: async (data: CreateProductRequest) => {
-      const res = await productService.createProduct(data);
+      const res = await productService.createProduct(data, signal);
       return res.data;
     },
   });
@@ -27,10 +27,10 @@ export const useDeleteProductMutation = () => {
   });
 };
 
-export const useUpdateProductMutation = () => {
+export const useUpdateProductMutation = (signal?: AbortSignal) => {
   return useMutation({
     mutationFn: async (data: UpdateProductRequest) => {
-      const res = await productService.updateProduct(data.id, data);
+      const res = await productService.updateProduct(data.id, data, signal);
       return res.data;
     },
   });

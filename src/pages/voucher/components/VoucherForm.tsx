@@ -7,7 +7,7 @@ import {
 } from '@/services/voucher';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@nextui-org/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -35,11 +35,23 @@ const VoucherForm = ({ data, type = 'new' }: Props) => {
     }
   }, [data, reset]);
 
-  const createVoucherMutation = useCreateVoucherMutation();
-  const updateVoucherMutation = useUpdateVoucherMutation();
+  const [abortControllerRef, setAbortController] = useState(
+    new AbortController(),
+  );
+  const createVoucherMutation = useCreateVoucherMutation(
+    abortControllerRef.signal,
+  );
+  const updateVoucherMutation = useUpdateVoucherMutation(
+    abortControllerRef.signal,
+  );
   const navigate = useNavigate();
 
   const isLoading = createVoucherMutation.isPending;
+
+  const onCancel = () => {
+    abortControllerRef.abort();
+    setAbortController(new AbortController());
+  };
 
   const onSubmit = (_data: CreateVoucherRequest | UpdateVoucherRequest) => {
     if (new Date(_data.expirationDate) < new Date()) {
@@ -163,9 +175,15 @@ const VoucherForm = ({ data, type = 'new' }: Props) => {
           type="date"
         />
 
-        <Button type="submit" color="primary">
-          {isEdit ? 'Update' : 'Create'}
-        </Button>
+        {isLoading ? (
+          <Button type="button" onPress={onCancel}>
+            Cancel
+          </Button>
+        ) : (
+          <Button type="submit" color="primary">
+            {isEdit ? 'Update' : 'Create'}
+          </Button>
+        )}
       </form>
     </div>
   );

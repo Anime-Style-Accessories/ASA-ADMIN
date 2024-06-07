@@ -57,7 +57,7 @@ const PageHeader = ({
       <div
         className=" flex h-11 items-center justify-center rounded-md
        border border-foreground-200 px-9 text-sm font-bold lg:w-[310px]">
-        {dayjs(currentTime).format('MMMM d, yyyy HH')}
+        {dayjs(currentTime).format('MMMM d, YYYY HH')}
         <span className="animate-pulse">:</span>
         {dayjs(currentTime).format('mm:ss')}
       </div>

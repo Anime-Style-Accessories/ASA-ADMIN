@@ -8,12 +8,12 @@ export const useUpdateOrderStatusMutation = () => {
     mutationFn: async (data: {
       id: string;
       paymentStatus: string;
-      shippingStatus: string;
+      deliveryStatus: string;
     }) => {
       const res = await orderService.updateOrderStatus(
         data.id,
         data.paymentStatus,
-        data.shippingStatus,
+        data.deliveryStatus,
       );
       if (res.status === 200) {
         queryClient.invalidateQueries({

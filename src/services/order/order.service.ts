@@ -15,11 +15,11 @@ export const orderService = {
   updateOrderStatus: async (
     id: string,
     paymentStatus: string,
-    shippingStatus: string,
+    deliveryStatus: string,
   ) =>
     await apiClient.post(API_ROUTES.ORDER.UPDATE_STATUS.replace(':id', id), {
       paymentStatus,
-      shippingStatus,
+      deliveryStatus,
     }),
   getOrderItems: async (id: string) =>
     await apiClient.get<PageDataOrderItem>(

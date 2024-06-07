@@ -3,11 +3,11 @@ import { CreateVoucherRequest, UpdateVoucherRequest, VoucherData } from '@/dto';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { voucherService } from './voucher.service';
 
-export const useCreateVoucherMutation = () => {
+export const useCreateVoucherMutation = (signal?: AbortSignal) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateVoucherRequest) => {
-      const res = await voucherService.createVoucher(data);
+      const res = await voucherService.createVoucher(data, signal);
       if (res.status === 200) {
         queryClient.setQueryData(
           [QUERY_KEY.VOUCHERS.GET_VOUCHERS],
@@ -36,11 +36,11 @@ export const useDeleteVoucherMutation = () => {
   });
 };
 
-export const useUpdateVoucherMutation = () => {
+export const useUpdateVoucherMutation = (signal?: AbortSignal) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: UpdateVoucherRequest) => {
-      const res = await voucherService.updateVoucher(data.id, data);
+      const res = await voucherService.updateVoucher(data.id, data, signal);
       if (res.status === 200) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.VOUCHERS.GET_VOUCHERS],

@@ -28,7 +28,7 @@ const OrderDetailPage = () => {
       {
         id: order.id,
         paymentStatus: e.target.value,
-        shippingStatus: order.shippingStatus,
+        deliveryStatus: order.shippingStatus,
       },
       {
         onSuccess: () => {
@@ -46,7 +46,7 @@ const OrderDetailPage = () => {
       {
         id: order.id,
         paymentStatus: order.paymentStatus,
-        shippingStatus: e.target.value,
+        deliveryStatus: e.target.value,
       },
       {
         onSuccess: () => {

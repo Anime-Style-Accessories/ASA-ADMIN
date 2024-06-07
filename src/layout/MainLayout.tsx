@@ -4,7 +4,6 @@ import { useAuthContext } from '@/context';
 import { useGetCurrentUserQuery } from '@/services/user';
 import { Spinner } from '@nextui-org/react';
 import { PropsWithChildren, useEffect } from 'react';
-import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
@@ -15,7 +14,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (isLoading) return;
     if (isError) {
-      toast.error('Please login to continue');
+      // toast.error('Please login to continue');
       setUser(null);
       navigate(ROUTES.AUTH.LOGIN);
       return;

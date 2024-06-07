@@ -11,7 +11,7 @@ import {
 } from '@/services/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@nextui-org/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -40,11 +40,23 @@ const CategoryForm = ({ data, type = 'new' }: Props) => {
     }
   }, [data, reset]);
 
-  const createCategoryMutation = useCreateCategoryMutation();
-  const updateCategoryMutation = useUpdateCategoryMutation();
+  const [abortControllerRef, setAbortController] = useState(
+    new AbortController(),
+  );
+  const createCategoryMutation = useCreateCategoryMutation(
+    abortControllerRef.signal,
+  );
+  const updateCategoryMutation = useUpdateCategoryMutation(
+    abortControllerRef.signal,
+  );
   const navigate = useNavigate();
 
   const isLoading = createCategoryMutation.isPending;
+
+  const onCancel = () => {
+    abortControllerRef.abort();
+    setAbortController(new AbortController());
+  };
 
   const onSubmit = (_data: CreateCategoryRequest | UpdateCategoryRequest) => {
     if (isEdit) {
@@ -115,9 +127,15 @@ const CategoryForm = ({ data, type = 'new' }: Props) => {
           isDisabled={isLoading}
           value={watch('description')}
         />
-        <Button type="submit" color="primary">
-          {isEdit ? 'Update' : 'Create'}
-        </Button>
+        {isLoading ? (
+          <Button type="button" onPress={onCancel}>
+            Cancel
+          </Button>
+        ) : (
+          <Button type="submit" color="primary">
+            {isEdit ? 'Update' : 'Create'}
+          </Button>
+        )}
       </form>
     </div>
   );

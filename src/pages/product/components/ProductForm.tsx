@@ -25,7 +25,7 @@ const ProductForm = ({ data, type = 'new' }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
     setValue,
     reset,
@@ -46,10 +46,17 @@ const ProductForm = ({ data, type = 'new' }: Props) => {
   }, [data, reset, setValue]);
 
   const [file, setFile] = useState<File | null>(null);
+  const [abortControllerRef, setAbortController] = useState(
+    new AbortController(),
+  );
 
-  const uploadMutation = useUploadSingleMutation();
-  const createProductMutation = useCreateProductMutation();
-  const updateProductMutation = useUpdateProductMutation();
+  const uploadMutation = useUploadSingleMutation(abortControllerRef.signal);
+  const createProductMutation = useCreateProductMutation(
+    abortControllerRef.signal,
+  );
+  const updateProductMutation = useUpdateProductMutation(
+    abortControllerRef.signal,
+  );
   const navigate = useNavigate();
 
   const isLoading = uploadMutation.isPending || createProductMutation.isPending;
@@ -64,7 +71,6 @@ const ProductForm = ({ data, type = 'new' }: Props) => {
   };
 
   const mutation = (_data: CreateProductRequest | UpdateProductRequest) => {
-    console.log(_data);
     if (isEdit) {
       updateProductMutation.mutate(
         {
@@ -93,10 +99,16 @@ const ProductForm = ({ data, type = 'new' }: Props) => {
           toast.success('Product created successfully');
         },
         onError: (err: any) => {
+          toast.dismiss();
           toast.error(err?.response?.data?.message || err.message);
         },
       });
     }
+  };
+
+  const onCancel = () => {
+    abortControllerRef.abort();
+    setAbortController(new AbortController());
   };
 
   const onSubmit = (_data: CreateProductRequest | UpdateProductRequest) => {
@@ -240,9 +252,15 @@ const ProductForm = ({ data, type = 'new' }: Props) => {
           type="number"
           value={watch('quantity')?.toString()}
         />
-        <Button type="submit" color="primary">
-          {isEdit ? 'Update' : 'Create'}
-        </Button>
+        {isLoading ? (
+          <Button type="button" onPress={onCancel}>
+            Cancel
+          </Button>
+        ) : (
+          <Button type="submit" color="primary" isLoading={isLoading}>
+            {isEdit ? 'Update' : 'Create'}
+          </Button>
+        )}
       </form>
     </div>
   );

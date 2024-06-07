@@ -10,11 +10,12 @@ import {
   Input,
 } from '@nextui-org/react';
 import { LogOut, SearchIcon, User2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
 
 const Topbar = () => {
   const { user: userInfo, setUser } = useAuthContext();
+  const navigate = useNavigate();
 
   const onClickLogout = () => {
     localStorage.removeItem(STORAGE.ACCESS_TOKEN);

@@ -3,11 +3,11 @@ import { CreateCategoryRequest, UpdateCategoryRequest } from '@/dto';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { categoryService } from './category.service';
 
-export const useCreateCategoryMutation = () => {
+export const useCreateCategoryMutation = (signal?: AbortSignal) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateCategoryRequest) => {
-      const res = await categoryService.createCategory(data);
+      const res = await categoryService.createCategory(data, signal);
       if (res.status === 200) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.CATEGORIES.GET_CATEGORIES],
@@ -33,7 +33,7 @@ export const useDeleteCategoryMutation = () => {
   });
 };
 
-export const useUpdateCategoryMutation = () => {
+export const useUpdateCategoryMutation = (signal?: AbortSignal) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
@@ -43,7 +43,7 @@ export const useUpdateCategoryMutation = () => {
       id: string;
       data: UpdateCategoryRequest;
     }) => {
-      const res = await categoryService.updateCategory(id, data);
+      const res = await categoryService.updateCategory(id, data, signal);
       if (res.status === 200) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.CATEGORIES.GET_CATEGORIES],

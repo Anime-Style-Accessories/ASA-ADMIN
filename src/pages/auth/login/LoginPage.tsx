@@ -39,7 +39,7 @@ const LoginPage = () => {
         navigate(ROUTES.DASHBOARD);
         localStorage.setItem(STORAGE.ACCESS_TOKEN, data.data.access_token);
         localStorage.setItem(STORAGE.REFRESH_TOKEN, data.data.refresh_token);
-        location.href = ROUTES.DASHBOARD;
+        location.reload();
       },
       onError: (err: any) => {
         console.error(err);
